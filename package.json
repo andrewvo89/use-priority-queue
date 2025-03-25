@@ -1,4 +1,38 @@
 {
   "name": "use-priority-queue",
-  "packageManager": "yarn@4.5.2"
+  "description": "Use Priority Queue is a React hook that provides a simple and efficient way to manage a priority queue in your React applications.",
+  "version": "0.1.0",
+  "packageManager": "yarn@4.7.0",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "license": "MIT",
+  "repository": {
+    "url": "git+https://github.com/andrewvo89/use-priority-queue.git"
+  },
+  "keywords": [
+    "react",
+    "hook",
+    "priority",
+    "queue",
+    "data",
+    "structure"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "@types/react": "^16.8",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8"
+  }
 }
