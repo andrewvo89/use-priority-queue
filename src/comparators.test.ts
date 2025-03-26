@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { maxHeapComparator, minHeapComparator } from './comparators';
-import { Node } from './priority-queue';
+import { Node } from './node';
 
 describe('Comparators', () => {
   const nodeA = new Node(1, 1);

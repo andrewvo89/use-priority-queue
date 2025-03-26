@@ -5,7 +5,7 @@ import tseslint from 'typescript-eslint';
 import * as reactHooks from 'eslint-plugin-react-hooks';
 
 export default defineConfig([
-  globalIgnores(['lib']),
+  globalIgnores(['dist']),
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], languageOptions: { globals: globals.browser } },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], plugins: { js }, extends: ['js/recommended'] },
@@ -18,7 +18,7 @@ export default defineConfig([
       quotes: ['error', 'single', { avoidEscape: true }],
       semi: ['error', 'always'],
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true }],
-      'no-duplicate-imports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
       'object-shorthand': 'error',
       'react-hooks/exhaustive-deps': 'error',
     },

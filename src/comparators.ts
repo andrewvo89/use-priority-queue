@@ -1,4 +1,4 @@
-import type { Node } from './priority-queue';
+import type { Node } from './node';
 
 export type Comparator<T> = (a: Node<T>, b: Node<T>) => number;
 

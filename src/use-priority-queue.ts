@@ -1,7 +1,9 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-import { Comparator, minHeapComparator } from './comparators';
+import { minHeapComparator } from './comparators';
 import { PriorityQueue } from './priority-queue';
+
+import type { Comparator } from './comparators';
 
 export function usePriorityQueue<T>(comparator: Comparator<T> = minHeapComparator) {
   const queue = useRef<PriorityQueue<T>>(new PriorityQueue(comparator));

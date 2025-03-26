@@ -1,14 +1,6 @@
-import { minHeapComparator, type Comparator } from './comparators';
-
-export class Node<T> {
-  priority: number;
-  value: T;
-
-  constructor(value: T, priority: number) {
-    this.value = value;
-    this.priority = priority;
-  }
-}
+import type { Comparator } from './comparators';
+import { minHeapComparator } from './comparators';
+import { Node } from './node';
 
 export class PriorityQueue<T> {
   private comparator: Comparator<T>;
