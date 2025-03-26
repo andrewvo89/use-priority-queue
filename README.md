@@ -51,50 +51,79 @@ pnpm add use-priority-queue
 ## Basic usage
 
 ```tsx
+import { useState } from 'react';
 import { usePriorityQueue } from 'use-priority-queue';
 
-type WeatherCondition = 'windy' | 'thunderstorm' | 'tornado' | 'hurricane' | 'tsunami';
+type WeatherCondition = 'windy 🍃' | 'thunderstorm ⛈️' | 'tornado 🌪️' | 'hurricane 🌀' | 'tsunami 🌊';
 
 type Priority = number;
 
-const weatherConditions: [WeatherCondition, Priority][] = [
-  ['tsunami', 1],
-  ['thunderstorm', 4],
-  ['hurricane', 2],
-  ['windy', 5],
-  ['tornado', 3],
+const initWeatherConditions: [WeatherCondition, Priority][] = [
+  ['hurricane 🌀', 2],
+  ['tsunami 🌊', 1],
+  ['tornado 🌪️', 3],
+  ['windy 🍃', 5],
+  ['thunderstorm ⛈️', 4],
 ];
 
-export function WeatherQueue() {
-  const { next, enqueue, dequeue } = usePriorityQueue<WeatherCondition>();
+export default function App() {
+  const { next, size, enqueue, dequeue } = usePriorityQueue<WeatherCondition>();
+  const [weatherConditions, setWeatherConditions] = useState(initWeatherConditions);
+  const [added, setAdded] = useState<WeatherCondition[]>([]);
+  const [removed, setRemoved] = useState<WeatherCondition[]>([]);
+  const nextWeatherCondition = weatherConditions.at(-1);
 
   const onAddWeatherCondition = () => {
-    const nextWeather = weatherConditions.pop();
-    if (!nextWeather) {
+    if (!nextWeatherCondition) {
       return;
     }
-    const [condition, priority] = nextWeather;
-    enqueue(condition, priority);
+    const [weatherCondition, priority] = nextWeatherCondition;
+    enqueue(weatherCondition, priority);
+    setWeatherConditions(weatherConditions.slice(0, -1));
+    setAdded((prev) => [...prev, weatherCondition]);
   };
 
   const onRemoveWeatherCondition = () => {
     const removedWeather = dequeue();
-    if (!removedWeather) {
-      return;
+    if (removedWeather) {
+      setRemoved((prev) => [...prev, removedWeather]);
+      setAdded((prev) => prev.filter((weather) => weather !== removedWeather));
     }
-    console.log(`Removed weather condition: ${removedWeather}`);
+  };
+
+  const emptyQueue = () => {
+    while (dequeue() !== undefined) {
+      // dequeue until empty
+    }
+  };
+
+  const onResetApp = () => {
+    emptyQueue();
+    setRemoved([]);
+    setAdded([]);
+    setWeatherConditions(initWeatherConditions);
   };
 
   return (
-    <div>
-      <h1>Weather queue</h1>
-      <button onClick={onAddWeatherCondition}>Add weather condition</button>
-      <div>Next most severe: {next}</div>
-      <button onClick={onRemoveWeatherCondition}>Remove most severe</button>
+    <div className='container'>
+      <h1>Weather Queue</h1>
+      <p>{`Queue size: ${size}`}</p>
+      <button disabled={!nextWeatherCondition} onClick={onAddWeatherCondition}>
+        Add weather condition to queue
+      </button>
+      <p>Added to queue: {added.join(' › ')}</p>
+      <p>Next most severe in queue: {next}</p>
+      <button disabled={weatherConditions.length > 0 || !next} onClick={onRemoveWeatherCondition}>
+        Remove most severe from queue
+      </button>
+      <p>Removed from queue: {removed.join(' › ')}</p>
+      <button onClick={onResetApp}>Reset</button>
     </div>
   );
 }
 ```
+
+An interactive example can be found on [CodeSandbox](https://codesandbox.io/p/sandbox/7m8gjk).
 
 ## Comparators
 
@@ -158,14 +187,14 @@ The `usePriorityQueue()` hook is a wrapper around the `PriorityQueue` class. You
 ```ts
 import { PriorityQueue } from 'use-priority-queue';
 
-type WeatherCondition = 'windy' | 'thunderstorm' | 'tornado' | 'hurricane' | 'tsunami';
+type WeatherCondition = 'windy 🍃' | 'thunderstorm ⛈️' | 'tornado 🌪️' | 'hurricane 🌀' | 'tsunami 🌊';
 
 const queue = new PriorityQueue<WeatherCondition>();
-queue.enqueue('windy', 5);
-queue.enqueue('thunderstorm', 4);
-queue.enqueue('tornado', 3);
-queue.enqueue('hurricane', 2);
-queue.enqueue('tsunami', 1);
+queue.enqueue('windy 🍃', 5);
+queue.enqueue('thunderstorm ⛈️', 4);
+queue.enqueue('tornado 🌪️', 3);
+queue.enqueue('hurricane 🌀', 2);
+queue.enqueue('tsunami 🌊', 1);
 const nextWeather = queue.next;
 console.log(`Next weather condition: ${nextWeather}`);
 // Next weather condition: tsunami
