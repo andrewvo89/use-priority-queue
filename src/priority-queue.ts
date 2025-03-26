@@ -13,12 +13,12 @@ export class Node<T> {
 export class PriorityQueue<T> {
   private comparator: Comparator<T>;
   private values: Node<T>[];
-  next: T | null;
+  next: T | undefined;
   size: number;
 
   constructor(comparator: Comparator<T> = minHeapComparator) {
     this.values = [];
-    this.next = null;
+    this.next = undefined;
     this.size = 0;
     this.comparator = comparator;
   }
@@ -27,16 +27,16 @@ export class PriorityQueue<T> {
     [this.values[indexA], this.values[indexB]] = [this.values[indexB], this.values[indexA]];
   }
 
-  private getParent(childIndex: number): [number, Node<T>] | null {
+  private getParent(childIndex: number): [number, Node<T>] | undefined {
     const parentIndex = Math.floor((childIndex - 1) / 2);
     if (parentIndex < 0) {
-      return null;
+      return undefined;
     }
     const parentNode = this.values[parentIndex];
     return [parentIndex, parentNode];
   }
 
-  private getSmallestChild(parentIndex: number): [number, Node<T>] | null {
+  private getSmallestChild(parentIndex: number): [number, Node<T>] | undefined {
     const leftIndex = 2 * parentIndex + 1;
     const rightIndex = leftIndex + 1;
 
@@ -44,7 +44,7 @@ export class PriorityQueue<T> {
 
     // Index out of bounds error
     if (leftNode === undefined) {
-      return null;
+      return undefined;
     }
 
     // Return the largest of the 2 children
@@ -128,9 +128,9 @@ export class PriorityQueue<T> {
     this.size = this.values.length;
   }
 
-  dequeue(): T | null {
+  dequeue(): T | undefined {
     if (this.values.length === 0) {
-      return null;
+      return undefined;
     }
 
     // Swap next priority value (root) with last element
@@ -142,7 +142,7 @@ export class PriorityQueue<T> {
     // Perform bubble down on new first element (which was the last element)
     this.bubbleDown(0);
 
-    this.next = this.values.at(0)?.value ?? null;
+    this.next = this.values.at(0)?.value;
     this.size = this.values.length;
 
     return last.value;

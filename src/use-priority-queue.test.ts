@@ -9,7 +9,7 @@ type WeatherCondition = 'windy' | 'thunderstorm' | 'tornado' | 'hurricane' | 'ts
 describe('usePriorityQueue<WeatherCondition>', () => {
   test('should initialize with an empty queue', () => {
     const { result } = renderHook(() => usePriorityQueue<WeatherCondition>());
-    expect(result.current.next).toBe(null);
+    expect(result.current.next).toBe(undefined);
   });
 
   test('should enqueue items correctly', () => {
@@ -32,7 +32,7 @@ describe('usePriorityQueue<WeatherCondition>', () => {
 
   test('should handle empty queue on dequeue', () => {
     const { result } = renderHook(() => usePriorityQueue<WeatherCondition>());
-    expect(result.current.dequeue()).toBe(null);
+    expect(result.current.dequeue()).toBe(undefined);
   });
 
   test('should peek at the next item without removing it', () => {

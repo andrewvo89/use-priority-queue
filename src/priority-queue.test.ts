@@ -4,14 +4,14 @@ import { PriorityQueue } from './priority-queue';
 type WeatherCondition = 'windy' | 'thunderstorm' | 'tornado' | 'hurricane' | 'tsunami';
 
 describe('Priority queue', () => {
-  test('returns null when the heap is empty', () => {
+  test('returns undefined when the heap is empty', () => {
     const queue = new PriorityQueue<WeatherCondition>();
-    expect(queue.dequeue()).toBe(null);
+    expect(queue.dequeue()).toBe(undefined);
   });
 
   test('next is nothing when the heap is empty', () => {
     const queue = new PriorityQueue<WeatherCondition>();
-    expect(queue.next).toBe(null);
+    expect(queue.next).toBe(undefined);
   });
 
   test('size is 0 when the heap is empty', () => {

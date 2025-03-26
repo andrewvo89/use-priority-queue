@@ -5,7 +5,7 @@ import { PriorityQueue } from './priority-queue';
 
 export function usePriorityQueue<T>(comparator: Comparator<T> = minHeapComparator) {
   const queue = useRef<PriorityQueue<T>>(new PriorityQueue(comparator));
-  const [next, setNext] = useState<T | null>(queue.current.next);
+  const [next, setNext] = useState<T | undefined>(queue.current.next);
   const [size, setSize] = useState(queue.current.size);
 
   const enqueue = useCallback((value: T, priority: number) => {
