@@ -15,10 +15,10 @@ export function usePriorityQueue<T>(comparator: Comparator<T> = minHeapComparato
   }, []);
 
   const dequeue = useCallback(() => {
-    const popped = queue.current.dequeue();
+    const dequeued = queue.current.dequeue();
     setNext(queue.current.next);
     setSize(queue.current.size);
-    return popped;
+    return dequeued;
   }, []);
 
   return useMemo(() => ({ enqueue, dequeue, next, size }), [enqueue, dequeue, next, size]);
