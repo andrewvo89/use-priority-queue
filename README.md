@@ -21,20 +21,20 @@
 
 ## About
 
-Use Priority Queue is a React hook that provides a simple and efficient way to manage a priority queue in your React applications. It uses a binary heap under the hood with values stored inside a JavaScript array.
+Use Priority Queue is a React hook that provides a simple and efficient way to manage a priority queue in your React applications. It uses a binary heap under the hood, with values stored inside a JavaScript array.
 
 ## Complexity
 
-| Operation   | Space Complexity | Time Complexity |
-| ----------- | ---------------- | --------------- |
-| Enqueue     | O(log n)         | O(n)            |
-| Deqeue      | O(log n)         | O(n)            |
-| Next (Peek) | O(1)             | O(1)            |
-| Size        | O(1)             | O(1)            |
+| Operation   | Time Complexity | Space Complexity |
+| ----------- | --------------- | ---------------- |
+| Enqueue     | O(log n)        | O(1)             |
+| Deqeue      | O(log n)        | O(1)             |
+| Next (Peek) | O(1)            | O(1)             |
+| Size        | O(1)            | O(1)             |
 
 ## Installation
 
-Install the package as a dependency on your own project by running:
+Install the package as a dependency on your project by running:
 
 ```bash
 npm install use-priority-queue
@@ -133,13 +133,13 @@ By default `usePriorityQueue()` uses a min binary heap (lower priority numbers a
 type Comparator<T> = (a: Node<T>, b: Node<T>) => number;
 ```
 
-| Comparator(a, b) return value | Sort order                                     |
-| ----------------------------- | ---------------------------------------------- |
-| > 0                           | `b` as higher priority than `a`, e.g. `[b, a]` |
-| < 0                           | `a` as higher priority than `b`, e.g. `[a, b]` |
-| === 0                         | `a` and `b` are equal priority                 |
+| Comparator(a, b) return value | Sort order                                       |
+| ----------------------------- | ------------------------------------------------ |
+| > 0                           | `b` as a higher priority than `a`, e.g. `[b, a]` |
+| < 0                           | `a` as a higher priority than `b`, e.g. `[a, b]` |
+| === 0                         | `a` and `b` are equal priority                   |
 
-By default, the comparator is set to `minHeapComparator()`.
+By default, the comparator is set to `minHeapComparator()`:
 
 ```ts
 import { minHeapComparator, usePriorityQueue } from 'use-priority-queue';
@@ -159,7 +159,7 @@ import { maxHeapComparator, usePriorityQueue } from 'use-priority-queue';
 const { next, enqueue, dequeue } = usePriorityQueue(maxHeapComparator);
 ```
 
-You are welcome to supply your own custom comparator to the `usePriorityQueue()` hook. A custom comparator can completely ignore `a.priority` and `b.priority` and use `a.value` and `b.value` instead. For example, if you want to sort blog posts by timestamp, you can do the following:
+You are welcome to supply your custom comparator to the `usePriorityQueue()` hook. A custom comparator can completely ignore `a.priority` and `b.priority` and use `a.value` and `b.value` instead. For example, if you want to sort blog posts by timestamp, you can do the following:
 
 ```ts
 import { usePriorityQueue } from 'use-priority-queue';
@@ -182,7 +182,7 @@ const { next, enqueue, dequeue } = usePriorityQueue<BlogPost>((a, b) => {
 
 ## PriorityQueue class
 
-The `usePriorityQueue()` hook is a wrapper around the `PriorityQueue` class. You can use the `PriorityQueue` class directly if you want to manage the queue outside of a React component. The `PriorityQueue` class has the same API as the `usePriorityQueue()` hook, but it does not have the React-specific features like reactivity everytime a node is added or removed.
+The `usePriorityQueue()` hook is a wrapper around the `PriorityQueue` class. You can use the `PriorityQueue` class directly to manage the queue outside a React component. The `PriorityQueue` class has the same API as the `usePriorityQueue()` hook, but it does not have the React-specific features like reactivity every time a node is added or removed.
 
 ```ts
 import { PriorityQueue } from 'use-priority-queue';
@@ -197,10 +197,10 @@ queue.enqueue('hurricane 🌀', 2);
 queue.enqueue('tsunami 🌊', 1);
 const nextWeather = queue.next;
 console.log(`Next weather condition: ${nextWeather}`);
-// Next weather condition: tsunami
+// Next weather condition: tsunami 🌊
 const removedWeather = queue.dequeue();
 console.log(`Removed weather condition: ${removedWeather}`);
-// Removed weather condition: tsunami
+// Removed weather condition: tsunami 🌊
 const queueSize = queue.size;
 console.log(`Queue size: ${queueSize}`);
 // Queue size: 4

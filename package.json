@@ -19,7 +19,8 @@
     "priority",
     "queue",
     "data",
-    "structure"
+    "structure",
+    "typescript"
   ],
   "scripts": {
     "build": "rollup -c",
