@@ -1,7 +1,7 @@
 {
   "name": "use-priority-queue",
   "description": "Use Priority Queue is a React hook that provides a simple and efficient way to manage a priority queue in your React applications.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "packageManager": "yarn@4.7.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
