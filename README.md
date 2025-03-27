@@ -48,6 +48,10 @@ yarn add use-priority-queue
 pnpm add use-priority-queue
 ```
 
+## Live demo
+
+An interactive example can be found on [CodeSandbox](https://codesandbox.io/p/sandbox/7m8gjk).
+
 ## Basic usage
 
 ```tsx
@@ -122,8 +126,6 @@ export default function App() {
   );
 }
 ```
-
-An interactive example can be found on [CodeSandbox](https://codesandbox.io/p/sandbox/7m8gjk).
 
 ## Comparators
 
