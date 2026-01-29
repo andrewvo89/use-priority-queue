@@ -3,12 +3,12 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "24"
           cache: "yarn"
           registry-url: "https://registry.npmjs.org"
       - name: Install dependencies
@@ -34,5 +34,6 @@ jobs:
         run: yarn test
       - name: Build
         run: yarn build
+        # https://github.com/actions/setup-node/issues/1440#issuecomment-3571890875
       - name: Publish
-        run: npm publish
+        run: NODE_AUTH_TOKEN="" npm publish
